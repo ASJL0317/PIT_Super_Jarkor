@@ -5,6 +5,8 @@
 </head>
 
 <body>
+
+Hola
 <img id="indicator" src="images/indicator.gif" alt="Loading..." style="display:none"/> 
 </body>
 </html>
