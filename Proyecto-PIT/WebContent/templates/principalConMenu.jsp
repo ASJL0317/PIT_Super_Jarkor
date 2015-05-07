@@ -6,17 +6,15 @@
 <html>
 
 <head>
-<sj:head jqueryui="true" jquerytheme="le-frog" locale="es"/>
-<link rel="stylesheet" type="text/css" media="screen" href="css/screen.css" />
+<sj:head jqueryui="true" jquerytheme="" locale="es"/>
+<link rel="" type="text/css" media="screen" href="css/screen.css" />
 </head>
-
-
 <body>
-	<div id="idPrincipal">
+	<div id="idPrincipal" class="main">
 			<div id="idCabecera">
 				<tiles:insertAttribute	name="cabecera" />
 			</div>
-			<div id="idCuerpo">
+			<div id="">
 				<div id="idMenu"><tiles:insertAttribute name="menu" /></div>
 				<div id="idCentralConMenu"><tiles:insertAttribute name="central" /></div>
 			</div>
