@@ -3,5 +3,9 @@
 <%@ taglib prefix="sj" uri="/struts-jquery-tags"%>
 <%@ taglib prefix="sjg" uri="/struts-jquery-grid-tags"%>
 
+<head>
+	<link type="text/javascript" href="${pageContext.request.contextPath}/js/jquery1.min.js">
+</head>
+
 <tiles:insertAttribute	name="central" />
 

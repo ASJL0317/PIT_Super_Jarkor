@@ -8,6 +8,7 @@
 <head>
 <sj:head jqueryui="true" jquerytheme="" locale="es"/>
 <link rel="" type="text/css" media="screen" href="css/screen.css" />
+<link type="text/javascript" href="${pageContext.request.contextPath}/js/jquery1.min.js">
 </head>
 <body>
 	<div id="idPrincipal" class="main">

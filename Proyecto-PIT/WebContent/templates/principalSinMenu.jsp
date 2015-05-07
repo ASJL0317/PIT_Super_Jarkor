@@ -6,6 +6,10 @@
 
 <html>
 
+<HEAD>
+	<link type="text/javascript" href="${pageContext.request.contextPath}/js/jquery1.min.js">
+</HEAD>
+
 <body>
 	<div id="idPrincipal">
 			<div id="idCabecera">

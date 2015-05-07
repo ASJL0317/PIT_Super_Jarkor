@@ -3,17 +3,18 @@
 <%@ taglib prefix="sjg" uri="/struts-jquery-grid-tags"%>
 
 <head>
+	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<link href="css/style.css" rel="stylesheet" type="text/css" media="all">
-	<link href="css/form.css" rel="stylesheet" type="text/css" media="all">
+	<link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" type="text/css" media="all">
+	<link href="${pageContext.request.contextPath}/css/form.css" rel="stylesheet" type="text/css" media="all">
 	<link href="http://fonts.googleapis.com/css?family=Exo+2" rel="stylesheet" type="text/css">
-	<link href="css/megamenu.css" rel="stylesheet" type="text/css" media="all">
-	<link rel="stylesheet" href="css/fwslider.css" media="all">
-	<script type="text/javascript" src="js/megamenu.js"></script>
+	<link href="${pageContext.request.contextPath}/css/megamenu.css" rel="stylesheet" type="text/css" media="all">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/fwslider.css" media="all">
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/megamenu.js"></script>
 	<script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
-	
 </head>
+
 <div class="header-bottom">
 	    <div class="wrap">
 			<div class="header-bottom-left">
