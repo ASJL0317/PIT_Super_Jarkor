@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 
+	Estudiar:
+	
+	http://mybatis.github.io/mybatis-3/es/dynamic-sql.html
+ -->
+<mapper namespace="dawi">
+	
+	<resultMap id="clienteMap" type="clienteBeanIbatis">
+         <id property="idCliente" column="cliente_idCliente" />
+         <result property="nombre" column="cliente_nombre" />
+         <result property="apellido" column="cliente_apellido" />
+         <association property="estado"  resultMap="estadoCivilMap"/>
+         <association property="ubigeo"  resultMap="ubigeoMap"/>
+     </resultMap>
+  	
+  	 <resultMap id="estadoCivilMap" type="estadoCivilBeanIbatis">
+         <id property="id" column="estado_id" />
+         <result property="descripcion" column="estado_descripcion" />
+     </resultMap>
+    
+     <resultMap id="ubigeoMap" type="ubigeoBeanIbatis">
+         <id property="idUbigeo" column="ubigeo_id" />
+         <result property="departamento" column="ubigeo_departamento" />
+         <result property="provincia" column="ubigeo_provincia" />
+         <result property="distrito" column="ubigeo_distrito" />
+     </resultMap>
+     
+    
+    <select id="SQL_clientesXEstadoCivil"  parameterType="int" 
+    			resultMap="clienteMap"   >
+		SELECT 
+				C.CODIGO as cliente_idCliente,
+				C.NOMBRE  as cliente_nombre,
+				C.APELLIDO  as cliente_apellido,
+				E.DESCRIPCION  as estado_descripcion,
+				U.DEPARTAMENTO  as ubigeo_departamento,
+				U.PROVINCIA  as ubigeo_provincia,
+				U.DISTRITO  as ubigeo_distrito
+		FROM 
+			TB_CLIENTE C 
+			INNER JOIN TB_ESTADO_CIVIL E ON C.ESTADO= E.CODIGO 
+			INNER JOIN UBIGEO U ON C.DISTRITO = U.ID
+			WHERE E.CODIGO = #{estado} 
+	</select>
+	
+	
+	<select id="SQL_estadoCivilListarTodos"  resultType="estadoCivilBeanIbatis"	>
+		SELECT 
+				CODIGO as id,
+				DESCRIPCION as descripcion
+		FROM 
+			TB_ESTADO_CIVIL
+	</select>
+			
+	<select id="SQL_productosXCategoria"  parameterType="java.lang.String"	resultType="productoBeanIbatis">
+		SELECT 
+				COD_PRO as idProducto,
+				NOM_PRO as nombre,
+				PRE_PRO as precio,
+				STK_PRO as stock,
+				CAT_PRO as categoria,
+				FEC_REG_PRO as fecha
+		FROM 
+			TB_PRODUCTO
+		WHERE
+			CAT_PRO = #{categoria} 
+			
+	</select>
+	
+	<select id="SQL_sedeXDistrito" 	parameterType="java.lang.String" resultType="sedeBeanIbatis">
+		SELECT 
+				COD_SED as idSede,
+				NOM_SED as nombre,
+				DIR_SED as direccion,
+				FEC_INA_SED as fecha,
+				GER_SED as gerente,
+				DIS_SED as distrito
+		FROM 
+			TB_SEDE
+		WHERE
+			DIS_SED = #{distrito}			
+	</select>
+	
+	<select id="SQL_traeDepartamentos" 	resultType="ubigeoBeanIbatis">
+		SELECT 
+				distinct DEPARTAMENTO as departamento
+		FROM 
+			UBIGEO
+	</select>
+	
+	<select id="SQL_traeProvincias"  parameterType="ubigeoBeanIbatis"	resultType="ubigeoBeanIbatis">
+		SELECT 
+				distinct PROVINCIA as provincia
+		FROM 
+			UBIGEO
+		WHERE
+			DEPARTAMENTO = #{idDepartamento}
+	</select>
+	
+	<select id="SQL_traeDistritos"  parameterType="ubigeoBeanIbatis"	resultType="ubigeoBeanIbatis">
+		SELECT 
+				distinct DISTRITO as distrito
+		FROM 
+			UBIGEO
+		WHERE
+			DEPARTAMENTO = #{idDepartamento} AND
+			PROVINCIA = #{idProvincia} 
+			
+	</select>	
+	
+
+	<select id="SQL_vendedoresXEstado" parameterType="java.lang.String"	resultType="vendedorBeanIbatis">
+		SELECT 
+				COD_VEN as intCodigo,
+				NOM_VEN as strNombre,
+				APE_VEN as strApellido,
+				EDA_VEN as intEdad,
+				FEC_NAC_VEN as strFecha,
+				EST_CIV_VEN as strEstado,
+				DIS_VEN as strDistrito
+		FROM 
+			TB_VENDEDOR
+		WHERE
+			EST_CIV_VEN = #{estado}			
+	</select>
+	
+	<select id="SQL_traeTodosVendedor" 	resultType="vendedorBeanIbatis">
+		SELECT 
+				COD_VEN as intCodigo,
+				NOM_VEN as strNombre,
+				APE_VEN as strApellido,
+				EDA_VEN as intEdad,
+				FEC_NAC_VEN as strFecha,
+				EST_CIV_VEN as strEstado,
+				DIS_VEN as strDistrito
+		FROM 
+			TB_VENDEDOR
+	</select>
+	
+	<select id="SQL_eliminaVendedor"  parameterType="int" >
+		DELETE FROM TB_VENDEDOR WHERE COD_VEN =  #{id}
+	</select>
+	
+	<select id="SQL_insertaVendedor"	parameterType="vendedorBeanIbatis" >
+		INSERT INTO TB_VENDEDOR VALUES(null, 
+				#{strNombre},
+				#{strApellido},
+				#{intEdad},
+				#{strFecha},
+				#{strEstado},
+				#{strDistrito})
+	</select>
+	
+	<select id="SQL_buscaVendedor" parameterType="int" resultType="vendedorBeanIbatis">
+		SELECT 
+				COD_VEN as intCodigo,
+				NOM_VEN as strNombre,
+				APE_VEN as strApellido,
+				EDA_VEN as intEdad,
+				FEC_NAC_VEN as strFecha,
+				EST_CIV_VEN as strEstado,
+				DIS_VEN as strDistrito
+		FROM 
+			TB_VENDEDOR
+		WHERE 
+			COD_VEN =  #{id}
+	</select>
+	
+	<select id="SQL_actualizaVendedor" resultType="vendedorBeanIbatis">
+			UPDATE 
+				TB_VENDEDOR 
+			SET  
+				NOM_VEN = #{strNombre}, 
+				APE_VEN = #{strApellido},
+				EDA_VEN = #{intEdad},
+				FEC_NAC_VEN = #{strFecha},
+				EST_CIV_VEN = #{strEstado},
+				DIS_VEN = #{strDistrito}
+			WHERE 
+				COD_VEN = #{intCodigo}
+	</select>
+	
+	<select id="SQL_registraPersonal"	parameterType="personalBeanIbatis" >
+		INSERT INTO TB_PERSONAL VALUES(null, 
+				#{strNombre},
+				#{filImagenBytes},
+				#{filImagenFileName},
+				#{filImagenContentType},
+				#{filCvBytes},
+				#{filCvFileName},
+				#{filCvContentType})
+	</select>
+	
+	<select id="SQL_listaPersonal" 	resultType="personalBeanIbatis">
+		SELECT 
+				COD_PER as intCodigo,
+				NOM_PER as strNombre
+		FROM 
+			TB_PERSONAL
+	</select>
+	
+	<select id="SQL_buscaPersonal" 	resultType="personalBeanIbatis" parameterType="int">
+		SELECT 
+				COD_PER as intCodigo,
+				NOM_PER as strNombre,
+				IMG_BYTES as filImagenBytes,
+				IMG_NOMBRE as filImagenFileName,
+				IMG_CONTENT_TYPE as filImagenContentType,
+				CV_BYTES as filCvBytes,
+				CV_NOMBRE as filCvFileName,
+				CV_CONTENT_TYPE as filCvContentType
+		FROM
+			TB_PERSONAL
+		WHERE
+			COD_PER =  #{id}		
+	</select>	
+	
+	<!-- Reportes -->
+	<select id="SQL_reportesConsultaVendedor" parameterType="vendedorBeanIbatis"	resultType="vendedorBeanIbatis">
+		SELECT 
+				COD_VEN as intCodigo,
+				NOM_VEN as strNombre,
+				APE_VEN as strApellido,
+				EDA_VEN as intEdad,
+				FEC_NAC_VEN as strFecha,
+				EST_CIV_VEN as strEstado,
+				DIS_VEN as strDistrito
+		FROM 
+			TB_VENDEDOR
+		WHERE
+			NOM_VEN like #{strNombre}	AND 
+			DIS_VEN = #{strDistrito}
+
+	</select>
+	
+	<select id="SQL_reportesVendedoresEnDistrito" 	resultType="reporteBeanIbatis">
+		SELECT 
+				DIS_VEN as distrito,
+				COUNT(*) as cantidad
+		FROM 
+			TB_VENDEDOR
+		GROUP BY 
+			DIS_VEN
+	</select>
+	
+	<select id="SQL_reportesVendedoresEnDistritoEstado"	resultType="reporteBeanIbatis">
+		SELECT 
+				EST_CIV_VEN as estado,
+				DIS_VEN as distrito,
+				COUNT(*) as cantidad
+		FROM 
+			TB_VENDEDOR
+		GROUP BY 
+			EST_CIV_VEN, DIS_VEN
+	</select>
+	
+	<select id="SQL_consultaDinamica01" 
+			parameterType="filtroBeanIbatis"	
+			resultType="vendedorBeanIbatis">
+		SELECT 
+				COD_VEN as intCodigo,
+				NOM_VEN as strNombre,
+				APE_VEN as strApellido,
+				EDA_VEN as intEdad,
+				FEC_NAC_VEN as strFecha,
+				EST_CIV_VEN as strEstado,
+				DIS_VEN as strDistrito
+		FROM 
+			TB_VENDEDOR
+		WHERE 
+			EST_CIV_VEN 
+			IN 
+		<foreach collection="estados" item="aux" open="(" close=")" separator=",">
+				#{aux}	
+		</foreach>	
+					
+	</select>
+	<select id="SQL_consultaDinamica02" 
+			parameterType="filtroBeanIbatis"	
+			resultType="vendedorBeanIbatis">
+		SELECT 
+				COD_VEN as intCodigo,
+				NOM_VEN as strNombre,
+				APE_VEN as strApellido,
+				EDA_VEN as intEdad,
+				FEC_NAC_VEN as strFecha,
+				EST_CIV_VEN as strEstado,
+				DIS_VEN as strDistrito
+		FROM 
+			TB_VENDEDOR
+		<where>
+			<if test="estado != '-1'">
+				EST_CIV_VEN = #{estado}	
+			</if>
+			<if test="distrito != '-1'">
+				AND DIS_VEN = #{distrito}	
+			</if>		
+		</where> 
+	</select>
+</mapper>
+
+
+
+
+

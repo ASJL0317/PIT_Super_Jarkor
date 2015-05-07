@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+
+	<!-- Definimos la plantilla principal de la aplicacion -->
+	<definition name="t_index_con_menu" template="/templates/principalConMenu.jsp" >
+		<put-attribute name="cabecera" value="/templates/cabecera.jsp"/>
+		<put-attribute name="menu" value="/templates/menu.jsp"/>		
+	</definition>
+	<definition name="t_index_sin_menu" template="/templates/principalSinMenu.jsp">
+		<put-attribute name="cabecera" value="/templates/cabecera.jsp"/>
+	</definition>	
+	<definition name="t_index_simple" template="/templates/principalSimple.jsp">
+
+	</definition>
+	
+	<!-- Consultas dinamicas -->
+	 <definition name="t_consulta01" extends="t_index_con_menu">
+		<put-attribute name="central" value="/consultasDinamicas/consulta01.jsp"/>
+	</definition>
+	 <definition name="t_consulta02" extends="t_index_con_menu">
+		<put-attribute name="central" value="/consultasDinamicas/consulta02.jsp"/>
+	</definition>
+ 	<definition name="t_consultaGrid" extends="t_index_simple">
+		<put-attribute name="central" value="/consultasDinamicas/vendedorListadoGrid.jsp"/>
+	</definition>		
+	
+	<!-- Reportes -->
+	 <definition name="t_reporte01" extends="t_index_con_menu">
+		<put-attribute name="central" value="/pages/reporte01.jsp"/>
+	</definition>
+	 <definition name="t_reporte02" extends="t_index_con_menu">
+		<put-attribute name="central" value="/pages/reporte02.jsp"/>
+	</definition>
+	 <definition name="t_reporte03" extends="t_index_con_menu">
+		<put-attribute name="central" value="/pages/reporte03.jsp"/>
+	</definition>
+	 <definition name="t_reporte04" extends="t_index_con_menu">
+		<put-attribute name="central" value="/pages/reporte04.jsp"/>
+	</definition>
+	 <definition name="t_reporte05" extends="t_index_con_menu">
+		<put-attribute name="central" value="/pages/reporte05.jsp"/>
+	</definition>
+	
+	
+	
+	<!-- Tiles de Consulta Cliente -->
+ 	<definition name="t_consultaCliente" extends="t_index_con_menu">
+		<put-attribute name="central" value="/pages/clienteConsulta.jsp"/>
+	</definition>
+ 	<definition name="t_consultaClienteGrid" extends="t_index_simple">
+		<put-attribute name="central" value="/pages/clienteConsultaGrid.jsp"/>
+	</definition>
+	
+	<!-- Tiles de mantenimiento Vendedor -->
+ 	<definition name="t_mantenimientoVendedor" extends="t_index_con_menu">
+		<put-attribute name="central" value="/pages/vendedorMantenimiento.jsp"/>
+	</definition>
+ 	<definition name="t_mantenimientoVendedorGrid" extends="t_index_simple">
+		<put-attribute name="central" value="/pages/vendedorMantenimientoGrid.jsp"/>
+	</definition>
+	
+	<!-- Tiles de Consulta producto -->
+ 	<definition name="t_consultaProducto" extends="t_index_con_menu">
+		<put-attribute name="central" value="/pages/productoListado01.jsp"/>
+	</definition>
+ 	<definition name="t_consultaProductoGrid" extends="t_index_simple">
+		<put-attribute name="central" value="/pages/productoListadoGrid.jsp"/>
+	</definition>	
+	
+	<!-- Tiles de Consulta sede -->
+ 	<definition name="t_consultaSede" extends="t_index_con_menu">
+		<put-attribute name="central" value="/pages/sedeListado01.jsp"/>
+	</definition>
+ 	<definition name="t_consultaSedeGrid" extends="t_index_simple">
+		<put-attribute name="central" value="/pages/sedeListadoGrid.jsp"/>
+	</definition>		
+	
+	<!-- Tiles de Consulta vendedor -->
+ 	<definition name="t_consultaVendedor" extends="t_index_con_menu">
+		<put-attribute name="central" value="/pages/vendedorListado01.jsp"/>
+	</definition>
+ 	<definition name="t_consultaVendedorGrid" extends="t_index_simple">
+		<put-attribute name="central" value="/pages/vendedorListadoGrid.jsp"/>
+	</definition>			
+	
+	<!-- Tiles de modelo de Fechas -->
+ 	<definition name="t_ejemploFecha" extends="t_index_con_menu">
+		<put-attribute name="central" value="/pages/modeloFechas.jsp"/>
+	</definition>		
+	
+	<!-- Tiles de modelo de ubigeo -->
+ 	<definition name="t_ejemploUbigeo" extends="t_index_con_menu">
+		<put-attribute name="central" value="/pages/modeloUbigeo.jsp"/>
+	</definition>
+			
+	<!-- Tiles de modelo de combobox -->
+ 	<definition name="t_ejemploCombo" extends="t_index_con_menu">
+		<put-attribute name="central" value="/pages/modeloComboBox.jsp"/>
+	</definition>
+	
+	<!-- Tiles de personal -->
+ 	<definition name="t_registroPersonal" extends="t_index_con_menu">
+		<put-attribute name="central" value="/pages/personalInsertado.jsp"/>
+	</definition>
+	<definition name="t_listaPersonal" extends="t_index_con_menu">
+		<put-attribute name="central" value="/pages/personalListado.jsp"/>
+	</definition>
+				
+</tiles-definitions>
+
+
+

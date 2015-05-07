@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+	<package name="dawi" namespace="/"
+		extends="struts-default,json-default,tiles-default">
+		
+		<result-types>
+			<result-type name="jasper"	class="org.apache.struts2.views.jasperreports.JasperReportsResult" />
+		</result-types>
+
+		<!-- consultas dinamicas -->
+		<action name="a_consulta01">
+			<result type="tiles">t_consulta01</result>
+		</action>
+		<action name="a_consulta02">
+			<result type="tiles">t_consulta02</result>
+		</action>		
+		
+		
+
+		
+		<!-- acciones hacia JSPs -->
+		<action name="a_consultaCliente">
+			<result type="tiles">t_consultaCliente</result>
+		</action>
+
+		<action name="a_mantenimientoVendedor">
+			<result type="tiles">t_mantenimientoVendedor</result>
+		</action>
+
+		<action name="a_consultaSede">
+			<result type="tiles">t_consultaSede</result>
+		</action>
+
+		<action name="a_consultaVendedor">
+			<result type="tiles">t_consultaVendedor</result>
+		</action>
+
+		<action name="a_consultaProducto">
+			<result type="tiles">t_consultaProducto</result>
+		</action>						
+
+		<action name="a_ejemploCombo">
+			<result type="tiles">t_ejemploCombo</result>
+		</action>
+
+		<action name="a_ejemploFecha">
+			<result type="tiles">t_ejemploFecha</result>
+		</action>
+
+		<action name="a_ejemploUbigeo">
+			<result type="tiles">t_ejemploUbigeo</result>
+		</action>	
+		
+		<action name="a_registroPersonal">
+			<result type="tiles">t_registroPersonal</result>
+		</action>
+		<action name="a_listaPersonal">
+			<result type="tiles">t_listaPersonal</result>
+		</action>						
+	</package>
+</struts>
