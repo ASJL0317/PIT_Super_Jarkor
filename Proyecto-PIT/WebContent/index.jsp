@@ -5,8 +5,8 @@
 </head>
 
 <body>
-
 XD
+Hola
 <img id="indicator" src="images/indicator.gif" alt="Loading..." style="display:none"/> 
 </body>
 </html>
